@@ -1,7 +1,14 @@
 # IntelliJ IDEA fsnotifier for WSL
 
-[IntelliJ IDEA for Linux](https://www.jetbrains.com/idea/download/#section=linux) works on WSL (Windows Subsystem for Linux; Bash for Windows) as well but the file watching feature does not work for now.
-This `fsnotifier` module allows the file watching feature works on WSL as well.
+[IntelliJ IDEA for Linux](https://www.jetbrains.com/idea/download/#section=linux) works on WSL (Windows Subsystem for Linux; Bash for Windows) as well, but the file watching feature is not available for now. It shows the following warning on startup:
+
+> ⚠️ External file changes sync may be slow.
+> File watcher gave up to operate.
+>
+> ![screenshot](idea-wsl-warning.png)
+
+This project provides `fsnotifier` module that allows the file watching feature works on WSL.
+External file changes will immediately appear.
 
 
 ## How to use
@@ -20,9 +27,7 @@ ls -la fsnotifier64
 cp -av fsnotifier64 ~/bin/idea-IC-*/bin/
 ```
 
-Run IDEA. Check if the following warning is not shown.
-
-> External file changes sync may be slow: File watcher gave up to operate
+Run IDEA and check if the warning is not shown.
 
 
 ## How it works

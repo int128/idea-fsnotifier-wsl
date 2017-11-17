@@ -96,13 +96,15 @@ bool init_inotify() {
 static void read_watch_descriptors_count() {
   FILE* f = fopen(WATCH_COUNT_NAME, "r");
   if (f == NULL) {
-    userlog(LOG_ERR, "can't open %s: %s", WATCH_COUNT_NAME, strerror(errno));
+    userlog(LOG_WARNING, "can't open %s: %s", WATCH_COUNT_NAME, strerror(errno));
+    watch_count = 1024;
     return;
   }
 
   char* str = read_line(f);
   if (str == NULL) {
-    userlog(LOG_ERR, "can't read from %s", WATCH_COUNT_NAME);
+    userlog(LOG_WARNING, "can't read from %s", WATCH_COUNT_NAME);
+    watch_count = 1024;
   }
   else {
     watch_count = atoi(str);

@@ -36,6 +36,7 @@
 #define LOG_ENV_ERROR "error"
 #define LOG_ENV_OFF "off"
 
+#define PATH_MOUNTED "/proc/mounts"
 
 #define USAGE_MSG \
     "fsnotifier - IntelliJ IDEA companion program for watching and reporting file and directory structure modifications.\n\n" \
@@ -410,9 +411,9 @@ static bool is_watchable(const char* fs) {
 }
 
 static array* unwatchable_mounts() {
-  FILE* mtab = setmntent(_PATH_MOUNTED, "r");
+  FILE* mtab = setmntent(PATH_MOUNTED, "r");
   if (mtab == NULL) {
-    userlog(LOG_ERR, "cannot open " _PATH_MOUNTED);
+    userlog(LOG_ERR, "cannot open " PATH_MOUNTED);
     return NULL;
   }
 

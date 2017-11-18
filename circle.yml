@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:xenial
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: |
+            apt update
+            apt install -y build-essential curl
+      - run:
+          name: Build
+          command: ./make.sh
+      - run:
+          name: Test
+          command: ./fsnotifier64 --selftest
+      - deploy:
+          name: Publish
+          command: |
+            if [ "$CIRCLE_TAG" ]; then
+              curl -L -o ~/github-release.tar.bz2 https://github.com/aktau/github-release/releases/download/v0.7.2/linux-amd64-github-release.tar.bz2
+              tar -C ~ -jxf ~/github-release.tar.bz2
+              export PATH=~/bin/linux/amd64:"$PATH"
+              github-release release \
+                --user int128 \
+                --repo idea-fsnotifier-wsl \
+                --tag "$CIRCLE_TAG" \
+                --name "$CIRCLE_TAG" \
+                --description "Released on $(date +%Y-%m-%d)"
+              github-release upload \
+                --user int128 \
+                --repo idea-fsnotifier-wsl \
+                --tag "$CIRCLE_TAG" \
+                --name fsnotifier64 \
+                --file fsnotifier64
+            fi
+
+deployment:
+  publish:
+    tag: /.*/

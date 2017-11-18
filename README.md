@@ -1,4 +1,4 @@
-# IntelliJ IDEA fsnotifier for WSL
+# IntelliJ IDEA fsnotifier for WSL [![CircleCI](https://circleci.com/gh/int128/idea-fsnotifier-wsl.svg?style=shield)](https://circleci.com/gh/int128/idea-fsnotifier-wsl)
 
 [IntelliJ IDEA for Linux](https://www.jetbrains.com/idea/download/#section=linux) works on WSL (Windows Subsystem for Linux; Bash for Windows) as well, but the file watching feature is not available for now. It shows the following warning on startup:
 

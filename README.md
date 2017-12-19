@@ -13,21 +13,32 @@ External file changes will immediately appear.
 
 ## How to use
 
+Download [the latest release](https://github.com/int128/idea-fsnotifier-wsl/releases) and install it into `$IDEA/bin`.
+
+```sh
+ls -la fsnotifier64
+cp -av fsnotifier64 ~/bin/idea-IC-*/bin/
+```
+
+Run IDEA and check if the warning does not appear.
+
+
+### Build from source
+
 Make sure you have a C compiler.
 
 ```sh
 sudo apt install build-essential
+cc -v
 ```
 
-Compile source and install `fsnotifier64` to `bin` of IDEA.
+Make and install it into `$IDEA/bin`.
 
 ```sh
 ./make.sh
 ls -la fsnotifier64
 cp -av fsnotifier64 ~/bin/idea-IC-*/bin/
 ```
-
-Run IDEA and check if the warning is not shown.
 
 
 ## How it works

@@ -37,6 +37,7 @@ __asm__(".symver memcpy,memcpy@GLIBC_2.2.5");
 #define WATCH_COUNT_NAME "/proc/sys/fs/inotify/max_user_watches"
 
 #define DEFAULT_SUBDIR_COUNT 5
+#define DEFAULT_WATCH_COUNT 65535
 
 typedef struct __watch_node {
   int wd;
@@ -97,14 +98,14 @@ static void read_watch_descriptors_count() {
   FILE* f = fopen(WATCH_COUNT_NAME, "r");
   if (f == NULL) {
     userlog(LOG_WARNING, "can't open %s: %s", WATCH_COUNT_NAME, strerror(errno));
-    watch_count = 1024;
+    watch_count = DEFAULT_WATCH_COUNT;
     return;
   }
 
   char* str = read_line(f);
   if (str == NULL) {
     userlog(LOG_WARNING, "can't read from %s", WATCH_COUNT_NAME);
-    watch_count = 1024;
+    watch_count = DEFAULT_WATCH_COUNT;
   }
   else {
     watch_count = atoi(str);
